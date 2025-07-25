@@ -69,6 +69,11 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
+    city = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Город"
+    )
 
     objects = UserManager()
 

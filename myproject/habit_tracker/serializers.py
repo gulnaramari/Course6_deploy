@@ -58,7 +58,7 @@ class HabitSerializer(serializers.ModelSerializer):
 
         model = Habit
         fields = [
-            'id', 'name', 'place', 'date_completion', 'action', 'is_pleasant',
+            'id', 'name', 'place', 'date_begin', 'action', 'is_pleasant',
             'periodicity', 'award', 'execution_time', 'is_public', 'owner',
             'related_habit', 'related_habit_id'
         ]
