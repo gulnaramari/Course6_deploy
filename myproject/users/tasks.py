@@ -1,8 +1,11 @@
 from datetime import datetime
+
+import eventlet
 from celery import shared_task
 from .services import send_message_by_telegram
 from habit_tracker.models import Habit
 
+eventlet.monkey_patch()
 
 @shared_task
 def send_habit_notification():

@@ -178,9 +178,11 @@ CORS_ALLOW_ALL_ORIGINS = False
 
 CORS_ALLOW_CREDENTIALS = True
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+# URL-адрес брокера сообщений
+CELERY_BROKER_URL = 'redis://localhost:6379' # Например, Redis, который по умолчанию работает на порту 6379
 
-CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
+# URL-адрес брокера результатов, также Redis
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 CELERY_TIMEZONE = TIME_ZONE
 

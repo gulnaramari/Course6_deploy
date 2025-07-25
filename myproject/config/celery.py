@@ -1,9 +1,10 @@
 import os
+
+import eventlet
 from celery import Celery
-from celery.concurrency import eventlet
 
 
-
+eventlet.monkey_patch()
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 app = Celery("config")

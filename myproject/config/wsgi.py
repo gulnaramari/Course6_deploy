@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/wsgi/
 
 import os
 
+import eventlet
 from django.core.wsgi import get_wsgi_application
 
+eventlet.monkey_patch()
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 application = get_wsgi_application()
