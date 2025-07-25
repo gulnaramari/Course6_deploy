@@ -1,5 +1,7 @@
 import os
 from celery import Celery
+from celery.concurrency import eventlet
+
 
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")

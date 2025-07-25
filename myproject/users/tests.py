@@ -1,6 +1,3 @@
-from django.test import TestCase
-
-# Create your tests here.
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
@@ -52,7 +49,9 @@ class ProfileTestCase(TestCase, APITestCase):
         data = {"email": "test_user__for_test@test.com", "password": "test_user12345"}
         response = self.client.post(url, data=data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(User.objects.filter(email="test_user__for_test@test.com").count(), 1)
+        self.assertEqual(
+            User.objects.filter(email="test_user__for_test@test.com").count(), 1
+        )
         self.assertTrue(User.objects.all().exists())
 
     def test_update_detail_user(self):
@@ -75,4 +74,3 @@ class ProfileTestCase(TestCase, APITestCase):
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(User.objects.count(), 0)
-

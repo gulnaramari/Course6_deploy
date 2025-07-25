@@ -22,6 +22,14 @@ urlpatterns = [
     path("registration/", UserCreateAPIView.as_view(), name="registration"),
     path("detail/<int:pk>/update/", UserUpdateAPIView.as_view(), name="update_detail"),
     path("detail/<int:pk>/delete/", UserDestroyAPIView.as_view(), name="delete_detail"),
-    path("authorization/", TokenObtainPairView.as_view(permission_classes=(AllowAny,)), name="authorization"),
-    path("refresh/", TokenRefreshView.as_view(permission_classes=(AllowAny,)), name="token_refresh"),
+    path(
+        "authorization/",
+        TokenObtainPairView.as_view(permission_classes=(AllowAny,)),
+        name="authorization",
+    ),
+    path(
+        "refresh/",
+        TokenRefreshView.as_view(permission_classes=(AllowAny,)),
+        name="token_refresh",
+    ),
 ]

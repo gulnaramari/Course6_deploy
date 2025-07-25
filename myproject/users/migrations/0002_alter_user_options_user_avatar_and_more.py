@@ -7,22 +7,50 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='user',
-            options={'ordering': ['email'], 'verbose_name': 'пользователь', 'verbose_name_plural': 'пользователи'},
+            name="user",
+            options={
+                "ordering": ["email"],
+                "verbose_name": "пользователь",
+                "verbose_name_plural": "пользователи",
+            },
         ),
         migrations.AddField(
-            model_name='user',
-            name='avatar',
-            field=models.ImageField(blank=True, null=True, upload_to='users/images', validators=[django.core.validators.FileExtensionValidator(['jpg', 'png'], 'Расширение файла « %(extension)s » не допускается. Разрешенные расширения: %(allowed_extensions)s .Недопустимое расширение!')], verbose_name='Аватар профиля'),
+            model_name="user",
+            name="avatar",
+            field=models.ImageField(
+                blank=True,
+                null=True,
+                upload_to="users/images",
+                validators=[
+                    django.core.validators.FileExtensionValidator(
+                        ["jpg", "png"],
+                        "Расширение файла « %(extension)s » не допускается. Разрешенные расширения: %(allowed_extensions)s .Недопустимое расширение!",
+                    )
+                ],
+                verbose_name="Аватар профиля",
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='tg_nickname',
-            field=models.CharField(blank=True, max_length=32, null=True, unique=True, validators=[django.core.validators.RegexValidator(code='invalid_telegram_nickname', message='Имя пользователя в Telegram должен начинаться с @ и содержать только буквы, цифры и символы подчеркивания', regex='^@[A-Za-z0-9_]{4,31}$')], verbose_name='Имя пользователя в Telegram'),
+            model_name="user",
+            name="tg_nickname",
+            field=models.CharField(
+                blank=True,
+                max_length=32,
+                null=True,
+                unique=True,
+                validators=[
+                    django.core.validators.RegexValidator(
+                        code="invalid_telegram_nickname",
+                        message="Имя пользователя в Telegram должен начинаться с @ и содержать только буквы, цифры и символы подчеркивания",
+                        regex="^@[A-Za-z0-9_]{4,31}$",
+                    )
+                ],
+                verbose_name="Имя пользователя в Telegram",
+            ),
         ),
     ]

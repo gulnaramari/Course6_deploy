@@ -30,9 +30,15 @@ class UserManager(BaseUserManager):
 class User(AbstractUser):
 
     username = models.CharField(
-        max_length=150, verbose_name="username", help_text="Введите ваш логин(юзернейм)", null=True, blank=True
+        max_length=150,
+        verbose_name="username",
+        help_text="Введите ваш логин(юзернейм)",
+        null=True,
+        blank=True,
     )
-    email = models.EmailField(unique=True, verbose_name="email", help_text="Введите ваш емейл")
+    email = models.EmailField(
+        unique=True, verbose_name="email", help_text="Введите ваш емейл"
+    )
     avatar = models.ImageField(
         upload_to="users/images",
         null=True,
@@ -59,21 +65,17 @@ class User(AbstractUser):
         unique=True,
         validators=[
             RegexValidator(
-                regex=r'^@[A-Za-z0-9_]{4,31}$',
-                message='Имя пользователя в Telegram должен начинаться с @'
-                        ' и содержать только буквы, цифры и символы подчеркивания',
-                code='invalid_telegram_nickname'
+                regex=r"^@[A-Za-z0-9_]{4,31}$",
+                message="Имя пользователя в Telegram должен начинаться с @"
+                " и содержать только буквы, цифры и символы подчеркивания",
+                code="invalid_telegram_nickname",
             )
         ],
-        verbose_name='Имя пользователя в Telegram',
+        verbose_name="Имя пользователя в Telegram",
         blank=True,
-        null=True
+        null=True,
     )
-    city = models.CharField(
-        max_length=100,
-        blank=True,
-        verbose_name="Город"
-    )
+    city = models.CharField(max_length=100, blank=True, verbose_name="Город")
 
     objects = UserManager()
 
@@ -85,6 +87,7 @@ class User(AbstractUser):
 
     class Meta:
         """Класс для изменения поведения полей модели "Пользователь"."""
+
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"
         ordering = ["email"]
