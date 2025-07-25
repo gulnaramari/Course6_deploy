@@ -15,6 +15,7 @@ class RelatedHabitSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
 class DurationFieldInSeconds(serializers.DurationField):
     """ Класс сериализатора для поля frequency  у модели привычки. """
     def to_representation(self, value):
