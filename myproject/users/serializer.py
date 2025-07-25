@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["avatar", "email", "tg_nickname", "tg_id", "city"]
+        fields = ["email", "avatar", "tg_chat_id", "tg_nickname",]
 
 
 class UserBaseSerializer(serializers.ModelSerializer):
@@ -15,7 +15,7 @@ class UserBaseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["avatar", "email", "city"]
+        fields = ["email", "avatar",]
 
 
 class CreateUserBaseSerializer(serializers.ModelSerializer):
@@ -27,4 +27,4 @@ class CreateUserBaseSerializer(serializers.ModelSerializer):
         """Класс для изменения поведения полей сериализатора"""
 
         model = User
-        fields = ["avatar", "email", "city", "password"]
+        fields = ["email", "avatar", "password"]

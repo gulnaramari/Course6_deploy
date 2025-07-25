@@ -1,5 +1,6 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator, FileExtensionValidator
 from django.db import models
 
 
@@ -32,6 +33,20 @@ class User(AbstractUser):
         max_length=150, verbose_name="username", help_text="Введите ваш логин(юзернейм)", null=True, blank=True
     )
     email = models.EmailField(unique=True, verbose_name="email", help_text="Введите ваш емейл")
+    avatar = models.ImageField(
+        upload_to="users/images",
+        null=True,
+        blank=True,
+        verbose_name="Аватар профиля",
+        validators=[
+            FileExtensionValidator(
+                ["jpg", "png"],
+                "Расширение файла « %(extension)s » не допускается. "
+                "Разрешенные расширения: %(allowed_extensions)s ."
+                "Недопустимое расширение!",
+            )
+        ],
+    )
     tg_chat_id = models.CharField(
         max_length=50,
         verbose_name="telegram chat id",
@@ -42,9 +57,17 @@ class User(AbstractUser):
     tg_nickname = models.CharField(
         max_length=32,
         unique=True,
-        verbose_name="Имя пользователя в Telegram",
+        validators=[
+            RegexValidator(
+                regex=r'^@[A-Za-z0-9_]{4,31}$',
+                message='Имя пользователя в Telegram должен начинаться с @'
+                        ' и содержать только буквы, цифры и символы подчеркивания',
+                code='invalid_telegram_nickname'
+            )
+        ],
+        verbose_name='Имя пользователя в Telegram',
         blank=True,
-        null=True,
+        null=True
     )
 
     objects = UserManager()
@@ -56,5 +79,7 @@ class User(AbstractUser):
         return self.username if self.username else self.email
 
     class Meta:
+        """Класс для изменения поведения полей модели "Пользователь"."""
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"
+        ordering = ["email"]
