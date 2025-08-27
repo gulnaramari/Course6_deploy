@@ -3,12 +3,10 @@
 import os
 import sys
 
-import eventlet
-
 
 def main():
     """Run administrative tasks."""
-    eventlet.monkey_patch()
+
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
     try:
         from django.core.management import execute_from_command_line
